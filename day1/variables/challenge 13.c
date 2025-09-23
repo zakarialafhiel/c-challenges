@@ -30,14 +30,7 @@ printf("La valeur de %d en binar est : ",n);
   }
   printf("\n___________\n___________\n");
   //pour transforme la valeur de n en hexadecimal//
-   while(h<=n){
-    h++;
-    if(n>0&&n<=9){
-      printf("%d",h);
-    }else{
-      
-    }
-   }   
+   //5dm bil while odir fuh xart dyal i<=n ou xart tani 3la 7asab n//   
 return 0;
 
 }
