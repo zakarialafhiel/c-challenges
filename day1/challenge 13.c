@@ -35,7 +35,7 @@ printf("La valeur de %d en binar est : ",n);
     if(n>0&&n<=9){
       printf("%d",h);
     }else{
-      if(){}
+      
     }
    }   
 return 0;
