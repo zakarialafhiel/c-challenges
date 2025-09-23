@@ -8,7 +8,7 @@ int main (){
     printf("Entre la valeur de c :");
     scanf("%d",&c);
     if (a+b>c||c+b>a||c+a>b){
-        if(a==b&& a==c){
+        if(a==b&& b==c && c==a){
             printf("motasawi adla3");
         }else if(a==b||b==c||c==a){
                 printf("motasawi sa9ayn");
