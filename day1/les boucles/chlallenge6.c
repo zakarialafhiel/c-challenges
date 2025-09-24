@@ -3,12 +3,13 @@ int main(){
     int y=0,i=0,n;
     printf("Entre un nombre : ");
     scanf("%d",&n);
-    while(i<1){
-        while(y<n&&y%2==0){
-            y++;
-        printf("%d ",y);
-        }
-
-    }
+      /*for(i=0;i<=n;i+=2){
+      printf("%d ",i);
+      }*/
+         for(i=2;i<=n*2;i++){
+          if(i%2==0){
+            printf("%d ",i);
+          }
+         }   
     return 0;
-}
+    }
