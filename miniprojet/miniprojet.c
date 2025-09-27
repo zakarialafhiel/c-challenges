@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX 100   // nombre max de livres
+#define MAX 100   // nombre maximum de livres
 
 // Définition de la structure Livre
 struct Livre {
@@ -20,9 +20,9 @@ void ajouterLivre() {
     if (taille < MAX) {
         printf("\n--- Ajouter un Livre ---\n");
         printf("Titre: ");
-        scanf(" %[^\n]", stock[taille].titre);
+        scanf("%s", stock[taille].titre);
         printf("Auteur: ");
-        scanf(" %[^\n]", stock[taille].auteur);
+        scanf("%s", stock[taille].auteur);
         printf("Prix: ");
         scanf("%f", &stock[taille].prix);
         printf("Quantite: ");
@@ -44,7 +44,8 @@ void afficherLivres() {
     printf("\n--- Liste des Livres ---\n");
     for (int i = 0; i < taille; i++) {
         printf("%d) %s | Auteur: %s | Prix: %.2f | Quantite: %d\n",
-               i + 1, stock[i].titre, stock[i].auteur, stock[i].prix, stock[i].quantite);
+               i + 1, stock[i].titre, stock[i].auteur,
+               stock[i].prix, stock[i].quantite);
     }
 }
 
@@ -62,7 +63,7 @@ int rechercherLivre(char titre[]) {
 void mettreAJourQuantite() {
     char titre[50];
     printf("\nTitre du livre a modifier: ");
-    scanf(" %[^\n]", titre);
+    scanf("%s", titre);
 
     int index = rechercherLivre(titre);
     if (index != -1) {
@@ -78,7 +79,7 @@ void mettreAJourQuantite() {
 void supprimerLivre() {
     char titre[50];
     printf("\nTitre du livre a supprimer: ");
-    scanf(" %[^\n]", titre);
+    scanf("%s", titre);
 
     int index = rechercherLivre(titre);
     if (index != -1) {
@@ -106,7 +107,7 @@ int main() {
     int choix;
 
     do {
-      printf("\t\t\t ____votre bibliothèque____");
+      printf("\n___________ votre bibliotheque ___________\n");
         printf("\n===== MENU =====\n");
         printf("1. Ajouter un livre\n");
         printf("2. Afficher tous les livres\n");
@@ -125,7 +126,7 @@ int main() {
         } else if (choix == 3) {
             char titre[50];
             printf("\nTitre a rechercher: ");
-            scanf(" %[^\n]", titre);
+            scanf("%s", titre);
             int index = rechercherLivre(titre);
             if (index != -1) {
                 printf("Trouve: %s | Auteur: %s | Prix: %.2f | Quantite: %d\n",
@@ -150,3 +151,4 @@ int main() {
 
     return 0;
 }
+
