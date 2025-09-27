@@ -1,21 +1,18 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX 100   // nombre maximum de livres
+#define MAX 100
 
-// Définition de la structure Livre
 struct Livre {
-    char titre[50];
-    char auteur[50];
-    float prix;
-    int quantite;
+    char titre[50];    
+    char auteur[50];   
+    float prix;        
+    int quantite;      
 };
 
-// Tableau de livres
 struct Livre stock[MAX];
-int taille = 0;   // nombre de livres dans le stock
+int taille = 0;
 
-// Fonction: Ajouter un livre
 void ajouterLivre() {
     if (taille < MAX) {
         printf("\n--- Ajouter un Livre ---\n");
@@ -35,48 +32,54 @@ void ajouterLivre() {
     }
 }
 
-// Fonction: Afficher tous les livres
 void afficherLivres() {
     if (taille == 0) {
-        printf("\nAucun livre en stock.\n");
+        printf("\nAucun livre en stock.\n"); // Condition ajoutée
         return;
     }
     printf("\n--- Liste des Livres ---\n");
     for (int i = 0; i < taille; i++) {
         printf("%d) %s | Auteur: %s | Prix: %.2f | Quantite: %d\n",
-               i + 1, stock[i].titre, stock[i].auteur,
-               stock[i].prix, stock[i].quantite);
+               i + 1, stock[i].titre, stock[i].auteur, stock[i].prix, stock[i].quantite);
     }
 }
 
-// Fonction: Rechercher un livre par titre
 int rechercherLivre(char titre[]) {
+    if (taille == 0) {
+        return -1; // Pas de livres dans le stock
+    }
     for (int i = 0; i < taille; i++) {
         if (strcmp(stock[i].titre, titre) == 0) {
-            return i; // retourne l'index si trouvé
+            return i;
         }
     }
-    return -1; // pas trouvé
+    return -1;
 }
 
-// Fonction: Mettre à jour la quantité
 void mettreAJourQuantite() {
+    if (taille == 0) {
+        printf("\nAucun livre en stock.\n");
+        return;
+    }
     char titre[50];
-    printf("\nTitre du livre a modifier: ");
+    printf("\nTitre du livre: ");
     scanf("%s", titre);
 
     int index = rechercherLivre(titre);
     if (index != -1) {
         printf("Nouvelle quantite: ");
         scanf("%d", &stock[index].quantite);
-        printf("Quantite mise a jour avec succes !\n");
+        printf("Quantite mise a jour !\n");
     } else {
         printf("Livre introuvable.\n");
     }
 }
 
-// Fonction: Supprimer un livre
 void supprimerLivre() {
+    if (taille == 0) {
+        printf("\nAucun livre en stock.\n");
+        return;
+    }
     char titre[50];
     printf("\nTitre du livre a supprimer: ");
     scanf("%s", titre);
@@ -84,17 +87,20 @@ void supprimerLivre() {
     int index = rechercherLivre(titre);
     if (index != -1) {
         for (int i = index; i < taille - 1; i++) {
-            stock[i] = stock[i + 1]; // décalage
+            stock[i] = stock[i + 1];
         }
         taille--;
-        printf("Livre supprime avec succes !\n");
+        printf("Livre supprime !\n");
     } else {
         printf("Livre introuvable.\n");
     }
 }
 
-// Fonction: Nombre total de livres
 void afficherTotalLivres() {
+    if (taille == 0) {
+        printf("\nAucun livre en stock.\n");
+        return;
+    }
     int total = 0;
     for (int i = 0; i < taille; i++) {
         total += stock[i].quantite;
@@ -102,19 +108,18 @@ void afficherTotalLivres() {
     printf("\nNombre total de livres en stock: %d\n", total);
 }
 
-// Programme principal
 int main() {
     int choix;
 
     do {
-      printf("\n___________ votre bibliotheque ___________\n");
+         printf("\n===== votre bibliotheque =====\n");
         printf("\n===== MENU =====\n");
         printf("1. Ajouter un livre\n");
         printf("2. Afficher tous les livres\n");
-        printf("3. Rechercher un livre par titre\n");
+        printf("3. Rechercher un livre\n");
         printf("4. Mettre a jour la quantite\n");
         printf("5. Supprimer un livre\n");
-        printf("6. Afficher le nombre total de livres\n");
+        printf("6. Afficher le total de livres\n");
         printf("7. Quitter\n");
         printf("Votre choix: ");
         scanf("%d", &choix);
@@ -124,16 +129,20 @@ int main() {
         } else if (choix == 2) {
             afficherLivres();
         } else if (choix == 3) {
-            char titre[50];
-            printf("\nTitre a rechercher: ");
-            scanf("%s", titre);
-            int index = rechercherLivre(titre);
-            if (index != -1) {
-                printf("Trouve: %s | Auteur: %s | Prix: %.2f | Quantite: %d\n",
-                       stock[index].titre, stock[index].auteur,
-                       stock[index].prix, stock[index].quantite);
+            if (taille == 0) {
+                printf("\nAucun livre en stock.\n");
             } else {
-                printf("Livre introuvable.\n");
+                char titre[50];
+                printf("Titre a rechercher: ");
+                scanf("%s", titre);
+                int index = rechercherLivre(titre);
+                if (index != -1) {
+                    printf("Trouve: %s | Auteur: %s | Prix: %.2f | Quantite: %d\n",
+                           stock[index].titre, stock[index].auteur,
+                           stock[index].prix, stock[index].quantite);
+                } else {
+                    printf("Livre introuvable.\n");
+                }
             }
         } else if (choix == 4) {
             mettreAJourQuantite();
@@ -151,4 +160,3 @@ int main() {
 
     return 0;
 }
-
